@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    HashgRouter as Router,
+    HashRouter as Router,
     Route,
     Redirect,
     Switch
