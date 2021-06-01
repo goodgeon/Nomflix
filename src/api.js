@@ -4,7 +4,8 @@ const api = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     params: {
         api_key: "57e3e7beeb6464d751af6b324f615585",
-        language: "en-US"
+        language: "ko",
+        region: "KR"
     }
 });
 
@@ -21,7 +22,24 @@ export const moviesApi = {
         params: {
             query: term
         }
-    })
+    }),
+    nowPlayingVideos: async () => {
+        let videoObjList = [];
+        let videoList = [];
+        let temp;
+
+        const { data } = await api.get("movie/now_playing")
+        await Promise.all(
+            data.results.map(async (item) => {
+                videoObjList.push(await api.get(`movie/${item.id}/videos`))
+                temp = await api.get(`movie/${item.id}/videos`);
+                temp.data.results && temp.data.results.length > 0 && videoList.push(temp.data.results[0].key);
+            })
+        )
+        videoList.sort(() => Math.random() - 0.5)
+
+        return videoList;
+    }
 }
 
 export const tvApi = {

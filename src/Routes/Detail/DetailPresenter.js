@@ -69,6 +69,8 @@ const Overview = styled.p`
     width : 50%;
 `
 
+
+
 const DetailPresenter = ({ result, loading, error }) =>
     loading ?
         <>
@@ -92,6 +94,8 @@ const DetailPresenter = ({ result, loading, error }) =>
                             ? `https://image.tmdb.org/t/p/original${result.poster_path}`
                             : require("../../assets/noPosterSmall.png")}
                     />
+
+
                     <Data>
                         <Title>{result.title ? result.title : result.name}</Title>
                         <ItemContainer>
@@ -107,9 +111,9 @@ const DetailPresenter = ({ result, loading, error }) =>
                         </ItemContainer>
                         <Overview>{result.overview}</Overview>
                     </Data>
-                </Content>
+                </Content >
 
-            </Container>
+            </Container >
         )
 
 DetailPresenter.propTypes = {

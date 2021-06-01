@@ -8,7 +8,9 @@ export default class extends React.Component {
         upcoming: null,
         popular: null,
         error: null,
-        loading: true
+        loading: true,
+        nowPlayingVideos: [],
+        mute: '1'
     };
 
     async componentDidMount() {
@@ -18,11 +20,13 @@ export default class extends React.Component {
 
             const { data: { results: upcoming } } = await moviesApi.upcoming();
             const { data: { results: popular } } = await moviesApi.popular();
+            const nowPlayingVideos = await moviesApi.nowPlayingVideos();
 
             this.setState({
                 nowPlaying,
                 upcoming,
-                popular
+                popular,
+                nowPlayingVideos,
             })
 
         } catch {
@@ -36,8 +40,20 @@ export default class extends React.Component {
         }
     }
 
+    onClick = () => {
+        if (this.state.mute === '1') {
+            this.setState({
+                mute: '0'
+            })
+        } else {
+            this.setState({
+                mute: '1'
+            })
+        }
+    }
+
     render() {
-        const { nowPlaying, upcoming, popular, error, loading } = this.state;
+        const { nowPlaying, upcoming, popular, error, loading, nowPlayingVideos, mute } = this.state;
         console.log(this.state)
         return (
             <HomePresenter
@@ -46,6 +62,9 @@ export default class extends React.Component {
                 popular={popular}
                 error={error}
                 loading={loading}
+                nowPlayingVideos={nowPlayingVideos}
+                mute={mute}
+                onClick={this.onClick}
             ></HomePresenter>
         )
     }

@@ -8,10 +8,10 @@ const Header = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   align-items: center;
-  background-color: rgba(20, 20, 20, 0.8);
+  background-color: rgba(20, 20, 20, 1);
   z-index: 10;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
@@ -37,17 +37,17 @@ const SLink = styled(Link)`
 `;
 
 export default withRouter(({ location: { pathname } }) => (
-    <Header>
-        <List>
-            <Item current={pathname === "/"}>
-                <SLink to="/">Movies</SLink>
-            </Item>
-            <Item current={pathname === "/tv"}>
-                <SLink to="/tv">TV</SLink>
-            </Item>
-            <Item current={pathname === "/search"}>
-                <SLink to="/search">Search</SLink>
-            </Item>
-        </List>
-    </Header>
+  <Header>
+    <List>
+      <Item current={pathname === "/"}>
+        <SLink to="/">Movies</SLink>
+      </Item>
+      <Item current={pathname === "/tv"}>
+        <SLink to="/tv">TV</SLink>
+      </Item>
+      <Item current={pathname === "/search"}>
+        <SLink to="/search">Search</SLink>
+      </Item>
+    </List>
+  </Header>
 ));
