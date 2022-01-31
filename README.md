@@ -18,3 +18,6 @@ Learning React and ES6 by building a Movie Discovery App.
 -[ ] Airing Today (TV)
 -[ ] TV Show Detail
 -[ ] Movie Detail
+
+
+화면작아지면 mute버튼 아이콘 작아짐

@@ -10,18 +10,8 @@ import Poster from '../../Components/Poster';
 const Container = styled.div`
     position : absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    z-index : -99
+    z-index : -99;
 `;
-
-const Iframe = styled.iframe`
-    box-sizing: border-box;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-`
 
 const VideoBackground = styled.div`
     box-sizing: border-box;
@@ -30,15 +20,27 @@ const VideoBackground = styled.div`
     height : 100vh;
     position : absolute;
     // position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: -99;
+    top: -15px; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    display : flex;
+    justify-content : center;
 `
 
 const VideoForeground = styled.div`
     box-sizing: border-box;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow : hidden;
+`
+const Iframe = styled.iframe`
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0px;
+    right : 0px;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -46,13 +48,19 @@ const VideoForeground = styled.div`
 
 const ListContainer = styled.div`
     padding : 20px;
-    margin-top : 93vh;
+    margin-top : 90vh;
     background-color : #000;
 `
 
 const MuteButton = styled.button`
-    padding-left : 0.8rem;
-    padding-right : 0.8rem;
+    // padding-left : 0.8rem;
+    // padding-right : 0.8rem;
+    width : 100%;
+    height : 100%;
+    padding : 0.5rem;
+    display : flex;
+    justify-content : center;
+    align-items : center;
     background-color : transparent;
     border : 1px solid rgba(255,255,255,0.7);
     color : white;
@@ -63,10 +71,11 @@ const MuteButton = styled.button`
 
 const MuteButtonContainer = styled.div`
     position : absolute;
-    right : 30px;
-    bottom : 20%;
+    right : 150px;
+    bottom : 15%;
     display : flex;
     z-index : 100;
+    cursor : pointer;
 `
 
 const MuteButtonSpan = styled.span`
@@ -81,10 +90,6 @@ const MuteButtonSvg = styled.svg`
     width : 100%;
 `
 
-const MuteButtonDiv = styled.div`
-    height : 1.8rem;
-    width : 1.8rem;
-`
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error, nowPlayingVideos, mute, onClick }) =>
     <>
@@ -96,17 +101,19 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error, nowPlayi
                 {nowPlayingVideos && nowPlayingVideos.length > 0 &&
                     <VideoBackground>
                         <VideoForeground>
-                            <Iframe src={`https://www.youtube.com/embed/${nowPlayingVideos[0]}?autoplay=1&mute=1&loop=1&playlist=${nowPlayingVideos}`} frameborder="0" allowfullscreen></Iframe>
+                            <Iframe width='1000' src={`https://www.youtube.com/embed/${nowPlayingVideos[0]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${nowPlayingVideos}`} frameborder="0" allowfullscreen></Iframe>
+                            <MuteButtonContainer>
+                                <MuteButtonSpan>
+                                    <MuteButton onClick={onClick}>
+                                        <div style={{ width: '2.4vw', height: '2.4vw' }}>
+                                            <MuteButtonSvg viewBox="0 0 24 24">
+                                                <path d="M9 7.828L6.828 10H4v4h2.828L9 16.172V7.828zM11 21l-5-5H2V8h4l5-5v18zm6-10.414l3.293-3.293 1.414 1.414L18.414 12l3.293 3.293-1.414 1.414L17 13.414l-3.293 3.293-1.414-1.414L15.586 12l-3.293-3.293 1.414-1.414L17 10.586z" fill="currentColor"></path>
+                                            </MuteButtonSvg>
+                                        </div>
+                                    </MuteButton>
+                                </MuteButtonSpan>
+                            </MuteButtonContainer>
                         </VideoForeground>
-                        <MuteButtonContainer>
-                            <MuteButtonSpan>
-                                <MuteButton onClick={onClick}>
-                                    <MuteButtonSvg viewBox="0 0 24 24">
-                                        <path d="M9 7.828L6.828 10H4v4h2.828L9 16.172V7.828zM11 21l-5-5H2V8h4l5-5v18zm6-10.414l3.293-3.293 1.414 1.414L18.414 12l3.293 3.293-1.414 1.414L17 13.414l-3.293 3.293-1.414-1.414L15.586 12l-3.293-3.293 1.414-1.414L17 10.586z" fill="currentColor"></path>
-                                    </MuteButtonSvg>
-                                </MuteButton>
-                            </MuteButtonSpan>
-                        </MuteButtonContainer>
 
                         {/* <iframe id="ytplayer" type="text/html" width="640" height="360"
                             src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&mute=1&origin=http://example.com"
